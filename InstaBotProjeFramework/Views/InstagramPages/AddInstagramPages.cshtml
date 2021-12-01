@@ -1,0 +1,53 @@
+﻿@model InstaBotProjeFramework.Models.InstagramProfileModel
+
+@using (Html.BeginForm("AddInstagramPages", "InstagramPages", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Instagram Profile</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+            <div class="card-body">
+                @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label>Instagram Username</label>
+                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @placeholder = "Enter username", @autocomplete = "off", @type = "text" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Url, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label>Instagram Url</label>
+                    @Html.TextBoxFor(x => x.Url, new { @class = "form-control", @placeholder = "Enter url", @autocomplete = "off", @type = "text" })
+                </div>
+
+                <div class="form-group">
+                    <label>Instagram Description</label>
+                    @Html.TextBoxFor(x => x.Description, new { @class = "form-control", @placeholder = "Enter description", @autocomplete = "off", @type = "text" })
+                </div>
+
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label>Password</label>
+                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Enter password", @autocomplete = "off", @type = "password" })
+                </div>
+
+                @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label>Password</label>
+                    @Html.TextBoxFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Enter password to confirm", @autocomplete = "off", @type = "password" })
+                </div>
+            </div>
+            <!-- /.card-body -->
+    </div>
+    <div class="form-group p-1">
+        <button type="submit" class="btn btn-primary btn-block">Kaydet</button>
+        <input type="button"
+               value="Kapat"
+               class="btn btn-danger"
+               data-dismiss="modal"
+               id="close" />
+    </div>
+
+}

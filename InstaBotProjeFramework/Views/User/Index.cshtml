@@ -1,0 +1,103 @@
+﻿@model InstaBotProjeFramework.Data.DTOs.UserDTO
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+
+                <!-- Profile Image -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="@Model.Picture"
+                                 alt="User profile picture" data-toggle="modal" data-target="#EditModal">
+                        </div>
+
+                        <h3 class="profile-username text-center">@Html.Raw(Model.Firstname + " " + Model.Lastname)</h3>
+
+                        <p class="text-muted text-center">@Html.Raw(Model.Username)</p>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- About Me Box -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">About Me</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <strong><i class="fas fa-book mr-1"></i> Age</strong>
+
+                        <p class="text-muted">
+                            @Html.Raw(Model.Age)
+                        </p>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- About Me Box -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Instagram Pages</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        @Html.Action("Index", "InstagramPages")
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+<div class="modal fade"  id="EditModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Resim Düzenleme</h2>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("EditPictureOfUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="form-group">
+                        @Html.Label("Resim")
+                        <div class="form-group">
+                            <div class="container-fluid pt-2">
+                                <div class="item">
+                                    <img src="@Model.Picture" id="Picture" style="width:250px;height:250px;border-radius:10px"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="Picture" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Id" id="Id" value="@Model.Id" hidden />
+                        </div>
+                    </div>
+                    <div class="form-group p-1">
+                        <input type="submit" value="Kaydet" class="btn btn-primary">
+                        <input type="button"
+                               value="Kapat"
+                               class="btn btn-danger"
+                               data-dismiss="modal"
+                               id="close" />
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>  

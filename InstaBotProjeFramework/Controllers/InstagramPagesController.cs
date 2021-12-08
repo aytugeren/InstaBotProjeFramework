@@ -36,28 +36,50 @@ namespace InstaBotProjeFramework.Controllers
         [HttpPost]
         public ActionResult AddInstagramPages(InstagramProfileModel instagramProfile)
         {
-            if (instagramProfile != null)
+            if (ModelState.IsValid)
             {
-                var userId = Guid.Parse(HttpContext.User.Identity.Name.Split('|')[1]);
-
-                var instaDTO = new InstagramProfileDTO
+                if (instagramProfile != null)
                 {
-                    Description = instagramProfile.Description,
-                    Url = instagramProfile.Url,
-                    Password = instagramProfile.Password,
-                    UserId = userId,
-                    Username = instagramProfile.Username
-                };
+                    var userId = Guid.Parse(HttpContext.User.Identity.Name.Split('|')[1]);
 
-                var isAdded = instaManager.AddInstagramProfile(instaDTO);
+                    var instaDTO = new InstagramProfileDTO
+                    {
+                        Description = instagramProfile.Description,
+                        Url = instagramProfile.Url,
+                        Password = instagramProfile.Password,
+                        UserId = userId,
+                        Username = instagramProfile.Username
+                    };
 
-                if (isAdded)
-                {
-                    return RedirectToAction("Index");
+                    var isAdded = instaManager.AddInstagramProfile(instaDTO);
+
+                    if (isAdded)
+                    {
+                        return RedirectToAction("Index", "User");
+                    }
                 }
+
+                return RedirectToAction("Index", "Error");
             }
 
-            return RedirectToAction("Index", "Error");
+            return View();
+
+        }
+
+        [HttpPost]
+        public JsonResult CheckUsernameOfUser(string username)
+        {
+            var result = instaManager.CheckUserNameOfUser(username);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult CheckUsernameOfUrl(string url)
+        {
+            var result = instaManager.CheckUserNameOfUrl(url);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

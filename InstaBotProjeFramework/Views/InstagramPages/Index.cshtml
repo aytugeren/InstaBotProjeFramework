@@ -1,20 +1,35 @@
 ﻿@model ICollection<InstaBotProjeFramework.Data.DTOs.InstagramProfileDTO>
 
+@{
+    var color = "";
+}
 
 @if (Model.Any())
 {
     foreach (var profile in Model)
     {
-        <div class="col-md-4">
+        if (profile.Status == "WaitingForApproval")
+        {
+            color = "btn btn-warning";
+        }
+        else if (profile.Status == "Passive")
+        {
+            color = "btn btn-default";
+        }
+        else if (profile.Status == "Error")
+        {
+            color = "btn btn-danger";
+        }
+        else if (profile.Status == "Published")
+        {
+            color = "btn btn-success";
+        }
             <!-- Widget: user widget style 1 -->
             <div class="card card-widget widget-user shadow">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-info">
                     <h3 class="widget-user-username">@Html.Raw(profile.Username)</h3>
                     <h5 class="widget-user-desc">@Html.Raw(profile.Description)</h5>
-                </div>
-                <div class="widget-user-image">
-                    <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
                 </div>
                 <div class="card-footer">
                     <div class="row">
@@ -36,12 +51,19 @@
                         </div>
                         <!-- /.col -->
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="@color" style="display:block !important">@profile.Status</div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
                     <!-- /.row -->
                 </div>
             </div>
             <!-- /.widget-user -->
-        </div>
     }
+
+    <span class="btn btn-success" data-toggle="modal" data-target="#AddProfile">Profil Ekle</span>
 }
 else
 {

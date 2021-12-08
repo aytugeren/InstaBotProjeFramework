@@ -20,6 +20,8 @@ namespace InstaBotProjeFramework.Models
 
         public int Following { get; set; }
 
+        public string Status { get; set; }
+
         [Required(ErrorMessage = "It must be filled!")]
         public string Password { get; set; }
 

@@ -19,6 +19,10 @@ namespace InstaBotProjeFramework.Data.DTOs
 
         public string Password { get; set; }
 
+        public string ConfirmPassword { get; set; }
+
+        public string Status { get; set; }
+
         public string Hashkey { get; set; }
 
         public Guid UserId { get; set; }

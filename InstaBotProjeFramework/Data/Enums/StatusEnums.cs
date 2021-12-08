@@ -14,6 +14,7 @@ namespace InstaBotProjeFramework.Data.Enums
         Ready= 5,
         UnPublished = 6,
         Removed = 7,
+        Error = 8,
         Trashed = 99
     }
 }

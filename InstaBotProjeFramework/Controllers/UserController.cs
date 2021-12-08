@@ -55,5 +55,7 @@ namespace InstaBotProjeFramework.Controllers
 
             return RedirectToAction("Index", "Error");
         }
+
+
     }
 }

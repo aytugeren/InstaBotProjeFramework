@@ -19,8 +19,6 @@ namespace InstaBotProjeFramework.Data.Entity
 
         public string Password { get; set; }
 
-        public string Hashkey { get; set; }
-
         public Guid UserId { get; set; }
 
         public User User { get; set; }

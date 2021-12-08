@@ -29,7 +29,8 @@ namespace InstaBotProjeFramework.Data.Managers
                     {
                         Username = item.Username,
                         Url = item.Url,
-                        Description = item.Description
+                        Description = item.Description,
+                        Status = item.Status
                     };
                     profilesDTO.Add(profile);
                 }
@@ -43,7 +44,6 @@ namespace InstaBotProjeFramework.Data.Managers
         {
             if (profileDTO != null)
             {
-                profileDTO.Hashkey = Guid.NewGuid().ToString();
                 var instagramProfile = new InstagramProfile
                 {
                     Id = Guid.NewGuid(),
@@ -51,9 +51,8 @@ namespace InstaBotProjeFramework.Data.Managers
                     Url = profileDTO.Url,
                     Username = profileDTO.Username,
                     UserId = profileDTO.UserId,
-                    Status = StatusEnums.New.ToString(),
-                    Password = this.GetHashedPassword(profileDTO.Password, profileDTO.Hashkey),
-                    Hashkey = profileDTO.Hashkey,
+                    Status = StatusEnums.WaitingForApproval.ToString(),
+                    Password = profileDTO.Password,
                     CreatedDateTime = DateTime.Now,
                     IsActive = true,
                     IsDeleted = false
@@ -66,18 +65,14 @@ namespace InstaBotProjeFramework.Data.Managers
             return false;
         }
 
-        private string GetHashedPassword(string password, string hashKey)
+        public bool CheckUserNameOfUser(string username)
         {
-            SHA1 encrypt = new SHA1CryptoServiceProvider();
-            var encrypted = encrypt.ComputeHash(Encoding.UTF8.GetBytes(password + hashKey));
-            var sb = new StringBuilder(encrypted.Length * 2);
-            foreach (byte b in encrypted)
-            {
-                sb.Append(b.ToString("x2"));
-            }
-            string encryptedPassword = sb.ToString();
-            return encryptedPassword;
+            return repoInstagram.List().Where(x => x.Username == username).Any();
         }
 
+        public bool CheckUserNameOfUrl(string url) 
+        { 
+            return repoInstagram.List().Where(x => x.Url == url).Any();
+        }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace InstaBotProjeFramework.Data.Entity
+namespace InstaBotProjeFramework.Data.DTOs
 {
-    public class Feature : BaseEntity
+    public class FeatureDTO
     {
+        public Guid FeatureId { get; set; }
         public string FeatureName { get; set; }
 
         public string FeatureSP { get; set; }
@@ -18,7 +19,5 @@ namespace InstaBotProjeFramework.Data.Entity
         public decimal FeaturePoint { get; set; }
 
         public string FeatureSeoName { get; set; }
-
-        public virtual ICollection<UserFeatures> Users { get; set; }
     }
 }

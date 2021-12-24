@@ -1,14 +1,28 @@
 let userCheckListData = [];
+let userCheckListDataEdit = [];
 
 let username = document.getElementById("username");
 let url = document.getElementById("url");
 let password = document.getElementById("password");
 let confirmPassword = document.getElementById("confirmPassword");
 let submitButton = document.getElementById("submitButtonForUser");
+
 userCheckListData.push(username)
 userCheckListData.push(url);
 userCheckListData.push(password)
 userCheckListData.push(confirmPassword);
+
+let usernameEdit = document.getElementById("usernameEdit");
+let urlEdit = document.getElementById("urlEdit");
+let descriptionEdit = document.getElementById("descriptionEdit");
+let pwEdit = document.getElementById("passwordEdit");
+let cfEdit = document.getElementById("confirmPasswordEdit");
+let Id = document.getElementById("Id");
+let submitButtonEdit = document.getElementById("submitButtonForUserEdit");
+
+userCheckListDataEdit.push(usernameEdit)
+userCheckListDataEdit.push(urlEdit);
+
 
 function ready(callback){
 
@@ -27,9 +41,8 @@ function ready(callback){
 }
 
 ready(function(){
-    checkSubmitIsAvailable(userCheckListData);
+    checkSubmitIsAvailable(userCheckListData, false);
 })
-
 
 username.addEventListener("focusout", function(){
     checkUsernameOfUser(username.value);
@@ -143,6 +156,7 @@ async function checkUrlOfUser(url){
     else{
         removeClass("warningTextUrl", 'btn btn-block bg-gradient-danger btn-xs')
         checkSubmitIsAvailable(userCheckListData, false);
+        checkUsernameOfUser(username.value)
     }
 }
 
@@ -167,7 +181,7 @@ const removeClass = (selector, classList) => {
 const checkSubmitIsAvailable = (list, isError) => {
     var result = "Kaydet";
     var resultStatus = false;
-    userCheckListData.forEach((item,id) =>{
+    list.forEach((item) =>{
         if ((item.value == null || item.value == '') || isError){
             result = "Lütfen ilgili alanları doldurunuz!";
             resultStatus = true;
@@ -176,4 +190,70 @@ const checkSubmitIsAvailable = (list, isError) => {
     
     submitButton.innerHTML = result;
     submitButton.disabled = resultStatus;
+}
+
+const checkSubmitIsAvailableForEditModel = (list, isError) => {
+    var result = "Kaydet";
+    var resultStatus = false;
+    list.forEach((item) =>{
+        if ((item.value == null || item.value == '') || isError){
+            result = "Lütfen ilgili alanları doldurunuz!";
+            resultStatus = true;
+        }
+    });
+    
+    submitButtonEdit.innerHTML = result;
+    submitButtonEdit.disabled = resultStatus;
+}
+
+function getEditModalByUrl(url){
+    editInstagramProfile(url);
+}
+
+async function editInstagramProfile(url) {
+    const response = await fetch("/InstagramPages/EditInstagramProfileByUrl",{
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            url : url
+        })
+    }).then(res => res.json())
+    .then(data => {return data})
+    .catch((error) => {
+        console.log("Error", error);
+    });
+
+    usernameEdit.value = response.Username;
+    urlEdit.value = response.Url;
+    descriptionEdit.value = response.Description;
+    Id.value= response.Id;
+}
+
+usernameEdit.addEventListener('input',function(){
+    if (usernameEdit.value == ''){
+        addClass('warningTextUsernameEdit', 'btn btn-block bg-gradient-danger btn-xs','Lütfen ilgili alanı doldurunuz!')
+        checkSubmitIsAvailableForEditModel(userCheckListDataEdit);
+    }
+    else{
+        removeClass("warningTextUsernameEdit", 'btn btn-block bg-gradient-danger btn-xs')
+        checkSubmitIsAvailableForEditModel(userCheckListDataEdit);
+    }
+})
+
+async function getRemoveModalById(id){
+    const response = await fetch("/InstagramPages/DeleteInstagramProfile",{
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers:{
+            'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify({
+            id : id
+        })
+    });
 }

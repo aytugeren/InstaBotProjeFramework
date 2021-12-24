@@ -1,0 +1,15 @@
+﻿@model List<InstaBotProjeFramework.Data.DTOs.FeatureDTO>
+
+@if (Model.Any())
+{
+    foreach (var item in Model)
+    {
+        var url = string.Format("{0}?featureId={1}", item.FeatureSeoName, item.FeatureId);
+        <li class="nav-item">
+            <a href="@Html.Raw(url)" class="nav-link">
+                <i class="nav-icon far fa-circle text-danger"></i>
+                <p class="text">@item.FeatureTitle</p>
+            </a>
+        </li>
+    }
+}

@@ -14,7 +14,7 @@ namespace InstaBotProjeFramework.Data.Managers
     public class UserManager
     {
         Repository<User> repoUser = new Repository<User>();
-
+        
         public bool InsertUser(UserDTO user) { 
             if (user != null)
             {
@@ -71,6 +71,21 @@ namespace InstaBotProjeFramework.Data.Managers
             }
 
             return default(UserDTO);
+        }
+
+        public UserStaticOfProfile GetUserStatistics(Guid id)
+        {
+            var user = repoUser.GetById(id);
+            var userStatics = new UserStaticOfProfile
+            {
+                ProfileCount = user.InstagramProfiles.Where(x => x.IsActive && !x.IsDeleted).Count(),
+                AccesibleProfileCount = user.InstagramProfiles.Where(x => x.Status == StatusEnums.Published.ToString()).Count(),
+                GivenErrorProfileCount = user.InstagramProfiles.Where(x => x.Status == StatusEnums.Error.ToString()).Count(),
+                FollowerCount = user.InstagramProfiles.Sum(x => x.Followers),
+                FollowingCount = user.InstagramProfiles.Sum(x => x.Following),
+                UsableBotCount = user.Features.Count()
+            };
+            return userStatics;
         }
 
         public bool UpdateUserPicture(string picture, Guid id)

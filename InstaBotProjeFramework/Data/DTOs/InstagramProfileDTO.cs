@@ -7,6 +7,7 @@ namespace InstaBotProjeFramework.Data.DTOs
 {
     public class InstagramProfileDTO
     {
+        public Guid Id { get; set; }
         public string Username { get; set; }
 
         public string Url { get; set; }
@@ -26,5 +27,9 @@ namespace InstaBotProjeFramework.Data.DTOs
         public string Hashkey { get; set; }
 
         public Guid UserId { get; set; }
+
+        public DateTime LastWorkedTime { get; set; }
+
+        public UserStaticOfProfile UserStaticOfProfile { get; set; }
     }
 }

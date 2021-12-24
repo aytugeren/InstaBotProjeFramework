@@ -25,8 +25,8 @@ namespace InstaBotProjeFramework.Data.Entity
 
         public string HashKey { get; set; }
 
-        public ICollection<Feature> Features { get; set; }
+        public virtual ICollection<UserFeatures> Features { get; set; }
 
-        public ICollection<InstagramProfile> InstagramProfiles { get; set; }
+        public virtual ICollection<InstagramProfile> InstagramProfiles { get; set; }
     }
 }

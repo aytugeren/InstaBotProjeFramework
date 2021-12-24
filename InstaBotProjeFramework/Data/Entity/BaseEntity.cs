@@ -13,7 +13,7 @@ namespace InstaBotProjeFramework.Data.Entity
 
         public DateTime CreatedDateTime { get; set; }
 
-        public DateTime UpdatedDateTime { get; set; }
+        public DateTime? UpdatedDateTime { get; set; }
 
         public bool IsActive { get; set; }
 

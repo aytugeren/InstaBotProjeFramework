@@ -35,5 +35,7 @@ namespace InstaBotProjeFramework.Data.DTOs
         public string Picture { get; set; }
 
         public string HashKey { get; set; }
+
+        public UserStaticOfProfile UserStaticOfProfile { get; set; }
     }
 }

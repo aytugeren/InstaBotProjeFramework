@@ -1,4 +1,4 @@
-﻿@model InstaBotProjeFramework.Data.DTOs.UserDTO
+﻿@model InstaBotProjeFramework.Data.DTOs.UserProfileDTO
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,13 +14,13 @@
                     <div class="card-body box-profile">
                         <div class="text-center">
                             <img class="profile-user-img img-fluid img-circle"
-                                 src="@Model.Picture"
+                                 src="@Model.User.Picture"
                                  alt="User profile picture" data-toggle="modal" data-target="#EditModal">
                         </div>
 
-                        <h3 class="profile-username text-center">@Html.Raw(Model.Firstname + " " + Model.Lastname)</h3>
+                        <h3 class="profile-username text-center">@Html.Raw(Model.User.Firstname + " " + Model.User.Lastname)</h3>
 
-                        <p class="text-muted text-center">@Html.Raw(Model.Username)</p>
+                        <p class="text-muted text-center">@Html.Raw(Model.User.Username)</p>
 
                     </div>
                     <!-- /.card-body -->
@@ -33,11 +33,45 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Age</strong>
+                        <div class="row">
+                            <div class="col-2">
+                                <strong><i class="fas fa-angle-right"></i> Toplam Hesap</strong>
+                                <p class="text-muted">
+                                    @Html.Raw(Model.UserStaticOfProfile.ProfileCount)
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <strong><i class="fas fa-angle-right"></i> Toplam Takipçi</strong>
+                                <p class="text-muted">
+                                    @Html.Raw(Model.UserStaticOfProfile.FollowerCount)
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <strong><i class="fas fa-angle-right"></i> Toplam Takip Edilen</strong>
+                                <p class="text-muted">
+                                    @Html.Raw(Model.UserStaticOfProfile.FollowingCount)
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <strong><i class="fas fa-angle-right"></i> Kullanılabilir Botlar</strong>
+                                <p class="text-muted">
+                                    @Html.Raw(Model.UserStaticOfProfile.UsableBotCount)
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <strong><i class="fas fa-angle-right"></i> Erişilebilir Hesaplar</strong>
+                                <p class="text-muted">
+                                    @Html.Raw(Model.UserStaticOfProfile.AccesibleProfileCount)
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <strong><i class="fas fa-angle-right"></i> Hata Alan Hesaplar</strong>
+                                <p class="text-muted">
+                                    @Html.Raw(Model.UserStaticOfProfile.GivenErrorProfileCount)
+                                </p>
+                            </div>
+                        </div>
 
-                        <p class="text-muted">
-                            @Html.Raw(Model.Age)
-                        </p>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -76,7 +110,7 @@
                         <div class="form-group">
                             <div class="container-fluid pt-2">
                                 <div class="item">
-                                    <img src="@Model.Picture" id="Picture" style="width:250px;height:250px;border-radius:10px"/>
+                                    <img src="@Model.User.Picture" id="Picture" style="width:250px;height:250px;border-radius:10px"/>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +118,7 @@
                             <input type="file" name="Picture" />
                         </div>
                         <div class="form-group">
-                            <input type="text" name="Id" id="Id" value="@Model.Id" hidden />
+                            <input type="text" name="Id" id="Id" value="@Model.User.Id" hidden />
                         </div>
                     </div>
                     <div class="form-group p-1">
@@ -100,4 +134,4 @@
             </div>
         </div>
     </div>
-</div>  
+</div> 

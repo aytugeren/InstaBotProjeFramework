@@ -127,20 +127,29 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeatureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstagramPagesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\DbContextFolder\InstaBotContext.cs" />
+    <Compile Include="Data\DTOs\FeatureDTO.cs" />
     <Compile Include="Data\DTOs\InstagramProfileDTO.cs" />
+    <Compile Include="Data\DTOs\InstagramProfileFromResponseDTO.cs" />
     <Compile Include="Data\DTOs\LoginDTO.cs" />
     <Compile Include="Data\DTOs\UserDTO.cs" />
+    <Compile Include="Data\DTOs\UserProfileDTO.cs" />
+    <Compile Include="Data\DTOs\UserStaticOfProfile.cs" />
     <Compile Include="Data\Entity\BaseEntity.cs" />
     <Compile Include="Data\Entity\Feature.cs" />
     <Compile Include="Data\Entity\InstagramProfile.cs" />
     <Compile Include="Data\Entity\User.cs" />
+    <Compile Include="Data\Entity\UserFeatures.cs" />
     <Compile Include="Data\Enums\StatusEnums.cs" />
+    <Compile Include="Data\Managers\DashboardManager.cs" />
+    <Compile Include="Data\Managers\FeatureManager.cs" />
     <Compile Include="Data\Managers\InstagramManager.cs" />
     <Compile Include="Data\Managers\UserManager.cs" />
     <Compile Include="Data\Repositories\IRepository.cs" />
@@ -3129,6 +3138,10 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\InstagramPages\Index.cshtml" />
     <Content Include="Views\InstagramPages\AddInstagramPages.cshtml" />
+    <Content Include="Views\InstagramPages\EditInstagramProfile.cshtml" />
+    <Content Include="Views\Dashboard\GetProfile.cshtml" />
+    <Content Include="Views\Dashboard\GetBots.cshtml" />
+    <Content Include="Views\Feature\FollowingBot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

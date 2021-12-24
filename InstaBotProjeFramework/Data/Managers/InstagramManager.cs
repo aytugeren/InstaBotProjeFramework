@@ -30,7 +30,10 @@ namespace InstaBotProjeFramework.Data.Managers
                         Username = item.Username,
                         Url = item.Url,
                         Description = item.Description,
-                        Status = item.Status
+                        Status = item.Status,
+                        Followers = item.Followers,
+                        Following = item.Following,
+                        Id = item.Id
                     };
                     profilesDTO.Add(profile);
                 }
@@ -38,6 +41,48 @@ namespace InstaBotProjeFramework.Data.Managers
             }
 
             return profilesDTO;
+        }
+
+        public InstagramProfile GetInstagramProfileInfoByUrl(string url)
+        {
+            var profile = repoInstagram.List().Where(x => x.Url == url).FirstOrDefault();
+            if (profile != null)
+            {
+                return new InstagramProfile { 
+                    Description = profile.Description,
+                    Url = profile.Url,
+                    Followers = profile.Followers,
+                    Following = profile.Following,
+                    Id = profile.Id,
+                    Username = profile.Username
+                };
+            }
+
+            return default(InstagramProfile);
+        }
+
+        public bool DeleteInstagramProfile(Guid id)
+        {
+            try
+            {
+                var instagramProfile = repoInstagram.GetById(id);
+                if (instagramProfile != null)
+                {
+                    instagramProfile.IsActive = false;
+                    instagramProfile.IsDeleted = true;
+                    instagramProfile.UpdatedDateTime = DateTime.Now;
+                    instagramProfile.Status = StatusEnums.Removed.ToString();
+                }
+
+                repoInstagram.Update(instagramProfile);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
         public bool AddInstagramProfile(InstagramProfileDTO profileDTO)

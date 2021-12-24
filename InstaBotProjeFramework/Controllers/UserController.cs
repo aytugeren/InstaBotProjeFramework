@@ -1,4 +1,5 @@
-﻿using InstaBotProjeFramework.Data.Managers;
+﻿using InstaBotProjeFramework.Data.DTOs;
+using InstaBotProjeFramework.Data.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,8 +22,9 @@ namespace InstaBotProjeFramework.Controllers
             {
                 userId = Guid.Parse(HttpContext.User.Identity.Name.Split('|')[1]);
                 var userDTO = userManager.GetUserById(userId);
-
-                return View(userDTO);
+                var userCount = userManager.GetUserStatistics(userId);
+                UserProfileDTO userProfileDTO = new UserProfileDTO() { User = userDTO, UserStaticOfProfile = userCount };
+                return View(userProfileDTO);
             }
 
             return RedirectToAction("Index","Login");

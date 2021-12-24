@@ -1,0 +1,50 @@
+﻿@model InstaBotProjeFramework.Models.InstagramProfileModel
+
+@using (Html.BeginForm("EditInstagramProfile", "InstagramPages", FormMethod.Post, new { enctype = "multipart/form-data", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Instagram Profile</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <div class="card-body">
+            <div style="display:none">
+                @Html.TextBoxFor(x => x.Id)
+            </div>
+            <div class="form-group">
+                <label>Instagram Username</label>
+                @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @placeholder = "Enter username", @autocomplete = "new-user", @type = "text", @id = "usernameEdit" })
+                <div id="warningTextUsernameEdit"></div>
+            </div>
+            <div class="form-group">
+                <label>Instagram Url</label>
+                @Html.TextBoxFor(x => x.Url, new { @class = "form-control", @placeholder = "Enter url", @autocomplete = false, @type = "text", @id = "urlEdit" })
+                <div id="warningTextUrl"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Instagram Description</label>
+                @Html.TextBoxFor(x => x.Description, new { @class = "form-control", @placeholder = "Enter description", @autocomplete = "off", @type = "text", @id = "descriptionEdit" })
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Enter password", @autocomplete = "new-password", @type = "password", @id = "passwordEdit" })
+                <div id="warningTextPassword"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                @Html.TextBoxFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Enter password to confirm", @autocomplete = "off", @type = "password", @id = "confirmPasswordEdit" })
+                <div id="warningTextConfirmPassword"></div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <div class="form-group p-1">
+        <button type="submit" class="btn btn-primary" id="submitButtonForUserEdit">Kaydet</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+    </div>
+}

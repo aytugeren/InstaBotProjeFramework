@@ -8,6 +8,8 @@ namespace InstaBotProjeFramework.Models
 {
     public class InstagramProfileModel
     {
+        public Guid Id { get; set; }
+
         [Required(ErrorMessage ="It must be filled!")]
         public string Username { get; set; }
 

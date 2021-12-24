@@ -32,6 +32,25 @@ namespace InstaBotProjeFramework.Controllers
             return PartialView(new InstagramProfileModel());
         }
 
+        [HttpGet]
+        public PartialViewResult EditInstagramProfile()
+        {
+            return PartialView(default(InstagramProfileModel));
+        }
+
+
+
+        [HttpPost]
+        public ActionResult EditInstagramProfile(InstagramProfileModel instagramProfile)
+        {
+            return RedirectToAction("Index", "User");
+        }
+
+        public JsonResult DeleteInstagramProfile(Guid id)
+        {
+            var result = instaManager.DeleteInstagramProfile(id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public ActionResult AddInstagramPages(InstagramProfileModel instagramProfile)
@@ -71,6 +90,13 @@ namespace InstaBotProjeFramework.Controllers
         {
             var result = instaManager.CheckUserNameOfUser(username);
 
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult EditInstagramProfileByUrl(string url)
+        {
+            var result = instaManager.GetInstagramProfileInfoByUrl(url);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

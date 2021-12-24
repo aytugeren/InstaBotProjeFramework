@@ -14,9 +14,16 @@ namespace InstaBotProjeFramework.Data.DbContextFolder
 
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserFeatures>().HasKey(x => new { x.UserId, x.FeatureId });
+        }
+
         public DbSet<User> tblUser { get; set; }
 
         public DbSet<Feature> tblFeatures { get; set; }
+
+        public DbSet<UserFeatures> tblUserFeatures { get; set; }
 
         public DbSet<InstagramProfile> tblInstagramProfile { get; set; }
     }

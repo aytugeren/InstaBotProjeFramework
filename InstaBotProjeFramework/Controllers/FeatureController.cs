@@ -11,6 +11,7 @@ namespace InstaBotProjeFramework.Controllers
     public class FeatureController : Controller
     {
         FeatureManager featureManager = new FeatureManager();
+
         // GET: Feature
         public ActionResult Index()
         {
@@ -22,6 +23,13 @@ namespace InstaBotProjeFramework.Controllers
             var userId = Guid.Parse(HttpContext.User.Identity.Name.Split('|')[1]);
             var profiles = featureManager.GetFeatureOfUser(userId, featureId);
             return PartialView(profiles);
+        }
+
+        public ActionResult UnFollowBot(Guid featureId)
+        {
+            var userId = Guid.Parse(HttpContext.User.Identity.Name.Split('|')[1]);
+            var profiles = featureManager.GetFeatureOfUser(userId, featureId);
+            return View(profiles);
         }
 
         [HttpPost]

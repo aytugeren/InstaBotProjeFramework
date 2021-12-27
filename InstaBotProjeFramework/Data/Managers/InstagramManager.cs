@@ -66,15 +66,8 @@ namespace InstaBotProjeFramework.Data.Managers
             try
             {
                 var instagramProfile = repoInstagram.GetById(id);
-                if (instagramProfile != null)
-                {
-                    instagramProfile.IsActive = false;
-                    instagramProfile.IsDeleted = true;
-                    instagramProfile.UpdatedDateTime = DateTime.Now;
-                    instagramProfile.Status = StatusEnums.Removed.ToString();
-                }
 
-                repoInstagram.Update(instagramProfile);
+                repoInstagram.Delete(instagramProfile);
 
                 return true;
             }

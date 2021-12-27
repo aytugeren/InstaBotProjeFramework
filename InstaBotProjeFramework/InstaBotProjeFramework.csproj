@@ -3143,6 +3143,7 @@
     <Content Include="Views\Dashboard\GetProfile.cshtml" />
     <Content Include="Views\Dashboard\GetBots.cshtml" />
     <Content Include="Views\Feature\FollowingBot.cshtml" />
+    <Content Include="Views\Feature\UnFollowBot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

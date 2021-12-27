@@ -18,6 +18,7 @@ namespace InstaBotProjeFramework.Data.Managers
 
         public List<InstagramProfileDTO> GetFeatureOfUser(Guid id, Guid featureId)
         {
+            //Linq Sorgusu Kullanildi!
             var profiles = repoInstagramProfile.List().Where(x => x.UserId == id && x.IsActive && !x.IsDeleted && x.Status == StatusEnums.Published.ToString());
             var feature = repoUserFeature.List().Where(x => x.UserId == id && x.FeatureId == featureId).FirstOrDefault();
             var listOfInstagramProfiles = new List<InstagramProfileDTO>();

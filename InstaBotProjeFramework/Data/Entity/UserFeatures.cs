@@ -12,6 +12,10 @@ namespace InstaBotProjeFramework.Data.Entity
         public Guid FeatureId { get; set; }
 
         public DateTime? LastWorkedTime { get; set; }
+        
+        public DateTime? WorkedTimeCurrently { get; set; }
+        
+        public int? LastWonFollowers { get; set; }
 
         public User User { get; set; }
 

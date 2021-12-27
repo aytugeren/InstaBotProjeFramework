@@ -3,11 +3,14 @@
     ViewBag.Title = "FollowingBot";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+  <link rel="stylesheet" href="~/Content/adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="~/Content/adminlte/plugins/toastr/toastr.min.css">
 
 @if (Model.Any())
 {
     foreach (var item in Model)
     {
+        <div class="d-none" id="profile">@item.Id</div>
         <div class="row d-flex" style="padding:15px;margin:10px;align-items:center">
             <div class="col-8">
                 <!-- Widget: user widget style 1 -->
@@ -15,14 +18,15 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-info">
                         <h3 class="widget-user-username">@Html.Raw(item.Username)</h3>
-                        <div style="padding-top:15px;">
-                            <a class="btn btn-outline-white">
-                                <i class="fas fa-play"></i> Botu Çalıştır!
-                            </a>
-                            <a class="btn btn-outline-danger">
-                                <i class="fas fa-pause"></i> Botu Durdur!
-                            </a>
-                        </div>
+                            <div style="padding-top:15px;">
+                                <a class="btn btn-outline-white" id="workBot">
+                                    <i class="fas fa-play"></i> Botu Çalıştır!
+                                </a>
+                                <a class="btn btn-outline-danger" id="stopBot">
+                                    <i class="fas fa-pause"></i> Botu Durdur!
+                                </a>
+                            </div>
+                            <div id="warningTextOfFollowingBot"></div>
                         <h5 class="widget-user-desc">@Html.Raw(item.Description)</h5>
                     </div>
                     <div class="card-footer">
@@ -63,13 +67,13 @@
                                     else
                                     {
                                         <div class="carousel-item active">
-                                            <p><b>Botun Çalışma Saati :</b> @DateTime.Now</p>
+                                            <p><b>Botun Çalışma Saati :</b> @item.WorkedTimeCurrently</p>
                                         </div>
                                         <div class="carousel-item">
                                             <p><b>Önceki Çalıştırılma Saati : </b>@item.LastWorkedTime</p>
                                         </div>
                                         <div class="carousel-item">
-                                            <p><b>Bir Öncekinden Kazanılan Takipçi : </b>250</p>
+                                            <p><b>Bir Öncekinden Kazanılan Takipçi : </b>@item.LastWonFollowers</p>
                                         </div>
                                     }
                                 </div>
@@ -79,8 +83,36 @@
                     </div>
                     <!-- /.card -->
                 </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                            <h5>
+                                <i class="icon fas fa-info">
+                                    Dikkat!
+                                </i>
+                            </h5>
+                            Lütfen takipçileri çekilecek sayfanın isminin doğru olup olmadığını kontrol ediniz!
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="FollowingBotName" />
+                                <div class="input-group-append">
+                                    <button type="submit" class="input-group-text" id="checkInstagramUser">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    }
+    }   
 }
 
+<script src="~/Content/adminlte/dist/js/pages/FollowingBot.js"></script>
+<script src="~/Content/adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/Content/adminlte/plugins/toastr/toastr.min.js"></script>

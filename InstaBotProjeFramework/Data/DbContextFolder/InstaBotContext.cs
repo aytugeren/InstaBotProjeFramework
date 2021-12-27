@@ -26,5 +26,7 @@ namespace InstaBotProjeFramework.Data.DbContextFolder
         public DbSet<UserFeatures> tblUserFeatures { get; set; }
 
         public DbSet<InstagramProfile> tblInstagramProfile { get; set; }
+
+        public DbSet<FollowBotInfo> tblFollowBotInfo { get; set; }
     }
 }

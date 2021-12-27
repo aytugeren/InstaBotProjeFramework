@@ -22,5 +22,7 @@ namespace InstaBotProjeFramework.Data.Entity
         public Guid UserId { get; set; }
 
         public User User { get; set; }
+
+        public virtual ICollection<FollowBotInfo> FollowBotInfo { get; set; }
     }
 }

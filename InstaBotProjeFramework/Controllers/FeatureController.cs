@@ -23,5 +23,12 @@ namespace InstaBotProjeFramework.Controllers
             var profiles = featureManager.GetFeatureOfUser(userId, featureId);
             return PartialView(profiles);
         }
+
+        [HttpPost]
+        public JsonResult CheckInstagramUser(string username,string profileId, string featureId)
+        {
+            var result = featureManager.IsUsernameAvailable(username, profileId, featureId);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

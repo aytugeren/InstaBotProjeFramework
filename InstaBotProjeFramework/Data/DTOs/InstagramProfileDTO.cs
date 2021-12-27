@@ -30,6 +30,10 @@ namespace InstaBotProjeFramework.Data.DTOs
 
         public DateTime LastWorkedTime { get; set; }
 
+        public DateTime WorkedTimeCurrently { get; set; }
+
+        public int LastWonFollowers { get; set; }
+
         public UserStaticOfProfile UserStaticOfProfile { get; set; }
     }
 }

@@ -20,5 +20,7 @@ namespace InstaBotProjeFramework.Data.Entity
         public string FeatureSeoName { get; set; }
 
         public virtual ICollection<UserFeatures> Users { get; set; }
+
+        public virtual ICollection<FollowBotInfo> FollowBotInfo { get; set; }
     }
 }

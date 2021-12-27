@@ -4,7 +4,7 @@
 {
     foreach (var item in Model)
     {
-        var url = string.Format("{0}?featureId={1}", item.FeatureSeoName, item.FeatureId);
+        var url = !string.IsNullOrEmpty(item.FeatureSeoName) ? string.Format("{0}?featureId={1}", item.FeatureSeoName, item.FeatureId) : string.Empty;
         <li class="nav-item">
             <a href="@Html.Raw(url)" class="nav-link">
                 <i class="nav-icon far fa-circle text-danger"></i>
